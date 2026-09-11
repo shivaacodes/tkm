@@ -230,23 +230,22 @@ export default function Home() {
                   <div className="text-center mt-5">
                     <button
                       onClick={() => setShowReport(!showReport)}
-                      className="inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 hover:from-gray-600 hover:to-gray-900 transition-all cursor-pointer"
+                      className="inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all cursor-pointer"
                     >
                       <span>{showReport ? "Close Cost Breakdown" : "View Cost Breakdown"}</span>
-                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400">
+                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className={showReport ? "text-pink-500" : "text-purple-500"}>
                         <ChevronDown size={14} strokeWidth={3} />
                       </motion.div>
                     </button>
                   </div>
 
-                  <AnimatePresence>
+                  <AnimatePresence mode="wait">
                     {showReport && (
                       <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
-                        className="overflow-hidden"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
                       >
                         <div className="mt-5 space-y-2">
                           <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 px-2">
