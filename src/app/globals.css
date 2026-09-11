@@ -13,8 +13,9 @@
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: linear-gradient(to bottom, #fdecec 0%, #F4F5F7 400px);
+  background-repeat: no-repeat;
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  overscroll-behavior-y: none;
 }

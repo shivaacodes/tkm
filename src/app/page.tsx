@@ -154,33 +154,27 @@ export default function Home() {
                     </motion.div>
                   </button>
 
-                  <AnimatePresence>
-                    {isDropdownOpen && (
-                      <>
-                        <div className="fixed inset-0 z-40" onClick={() => setIsDropdownOpen(false)} />
-                        <motion.div
-                          initial={{ opacity: 0, y: -5, scale: 0.98 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: -5, scale: 0.98 }}
-                          transition={{ duration: 0.15 }}
-                          className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl overflow-hidden z-50 py-1.5"
-                        >
-                          {RUN_OPTIONS.map((opt) => (
-                            <button
-                              key={opt.value}
-                              onClick={() => {
-                                setMonthlyKm(opt.value);
-                                setIsDropdownOpen(false);
-                              }}
-                              className={`w-full text-left px-4 py-3 text-[14px] transition-colors ${monthlyKm === opt.value ? 'bg-purple-50 text-purple-700 font-bold' : 'text-gray-700 font-medium hover:bg-gray-50'}`}
-                            >
-                              {opt.label}
-                            </button>
-                          ))}
-                        </motion.div>
-                      </>
-                    )}
-                  </AnimatePresence>
+                  {isDropdownOpen && (
+                    <>
+                      <div className="fixed inset-0 z-40" onPointerDown={() => setIsDropdownOpen(false)} />
+                      <div className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-hidden z-50 py-1.5">
+                        {RUN_OPTIONS.map((opt) => (
+                          <button
+                            type="button"
+                            key={opt.value}
+                            onPointerDown={(e) => {
+                              e.preventDefault();
+                              setMonthlyKm(opt.value);
+                              setIsDropdownOpen(false);
+                            }}
+                            className={`w-full text-left px-4 py-3.5 text-[14px] transition-colors ${monthlyKm === opt.value ? 'bg-purple-50 text-purple-700 font-bold' : 'text-gray-700 font-medium active:bg-gray-50'}`}
+                          >
+                            {opt.label}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
