@@ -26,19 +26,19 @@ const getRawNumber = (formatted: string) => parseFloat(formatted.replace(/,/g, "
 export default function Home() {
   const [competitorPrice, setCompetitorPrice] = useState<string>("");
   const [competitorMileage, setCompetitorMileage] = useState<string>("");
-  const [dailyKm, setDailyKm] = useState<string>("");
+  const [monthlyKm, setMonthlyKm] = useState<string>("");
   const [competitorMaintenance, setCompetitorMaintenance] = useState<string>("");
   const [showReport, setShowReport] = useState(false);
 
   const cPrice = getRawNumber(competitorPrice);
   const cMileage = getRawNumber(competitorMileage) || 1;
-  const dKm = getRawNumber(dailyKm);
+  const mKm = getRawNumber(monthlyKm);
   const cMaint = getRawNumber(competitorMaintenance);
   
-  const totalDays = YEARS * 365;
-  const totalKm = dKm * totalDays;
+  const totalMonths = YEARS * 12;
+  const totalKm = mKm * totalMonths;
 
-  const isComplete = cPrice > 0 && cMileage > 0 && dKm > 0 && cMaint > 0;
+  const isComplete = cPrice > 0 && cMileage > 0 && mKm > 0 && cMaint > 0;
 
   const cFuelTotal = (totalKm / cMileage) * FUEL_PRICE;
   const cMaintTotal = cMaint * YEARS;
@@ -131,20 +131,25 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500 shadow-sm border border-purple-100/50">
                     <CarFront size={14} strokeWidth={2.5} />
                   </div>
-                  <label className="text-[13px] font-bold text-gray-700">Daily Run</label>
+                  <label className="text-[13px] font-bold text-gray-700">Monthly Run</label>
                 </div>
                 <div className="relative">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={4}
-                    value={dailyKm}
-                    onChange={(e) => setDailyKm(formatIN(e.target.value))}
-                    placeholder="50"
-                    className="w-full pl-4 pr-10 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-xl font-bold shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] placeholder:text-gray-300"
-                  />
+                  <select
+                    value={monthlyKm}
+                    onChange={(e) => setMonthlyKm(e.target.value)}
+                    className={`w-full px-4 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-[15px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] appearance-none ${!monthlyKm ? 'text-gray-400 font-medium' : 'text-gray-900 font-bold'}`}
+                  >
+                    <option value="" disabled hidden>Select approx...</option>
+                    <option value="500">500 km / month</option>
+                    <option value="1000">1,000 km / month</option>
+                    <option value="1500">1,500 km / month</option>
+                    <option value="2000">2,000 km / month</option>
+                    <option value="2500">2,500 km / month</option>
+                    <option value="3000">3,000 km / month</option>
+                    <option value="4000">4,000+ km / month</option>
+                  </select>
                   <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                    <span className="text-gray-400 font-semibold text-xs">km</span>
+                    <ChevronDown size={18} className="text-gray-400" />
                   </div>
                 </div>
               </div>
