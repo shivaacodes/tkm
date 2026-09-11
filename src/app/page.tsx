@@ -93,7 +93,7 @@ export default function Home() {
           <h1 className="text-[40px] leading-none font-bold text-gray-900 tracking-tight font-heading">
             Compare & Save
           </h1>
-          <p className="text-gray-500 text-[13px] mt-2 font-medium uppercase tracking-wider">5-Year Cost of Ownership</p>
+          <p className="text-gray-500 text-[13px] mt-2 font-black uppercase tracking-widest">5-Year Cost of Ownership</p>
         </div>
 
         {/* Main Integrated Card */}
@@ -207,7 +207,7 @@ export default function Home() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                transition={{ type: "spring", bounce: 0.35, duration: 0.6 }}
                 className="overflow-hidden"
               >
                 <div className="pt-6 mt-6 border-t border-dashed border-gray-200">
@@ -244,7 +244,7 @@ export default function Home() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                        transition={{ type: "spring", bounce: 0.35, duration: 0.6 }}
                         className="overflow-hidden"
                       >
                         <div className="mt-5 border border-gray-200/60 rounded-[20px] overflow-hidden bg-white shadow-sm">
