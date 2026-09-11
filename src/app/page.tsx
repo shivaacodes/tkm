@@ -227,7 +227,7 @@ export default function Home() {
                   <div className="mt-6 flex justify-center">
                     <button
                       onClick={() => setShowReport(!showReport)}
-                      className="group flex items-center justify-center gap-2 px-5 py-3 bg-gray-50 hover:bg-gray-100/80 active:bg-gray-200 text-gray-700 text-[11px] font-black uppercase tracking-widest rounded-full transition-all active:scale-95 border border-gray-200/60 shadow-sm"
+                      className="group flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-b from-white to-gray-50 hover:to-gray-100 active:bg-gray-100 text-gray-800 text-[11px] font-black uppercase tracking-widest rounded-[14px] transition-all active:scale-[0.97] border border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
                     >
                       <span>{showReport ? "Close Breakdown" : "View Cost Breakdown"}</span>
                       <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400 group-hover:text-gray-600 transition-colors">
