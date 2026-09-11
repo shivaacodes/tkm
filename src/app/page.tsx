@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const HYRYDER_PRICE = 2176000;
 const HYRYDER_MILEAGE = 27.97;
-const HYRYDER_MAINTENANCE = 8000; 
+const HYRYDER_MAINTENANCE = 5300; // 26,500 total for 5 years
 const FUEL_PRICE = 114.04; 
 const YEARS = 5;
 
@@ -259,7 +259,7 @@ export default function Home() {
                         <div className="mt-4 px-2 flex gap-3 text-[11px] font-medium leading-relaxed text-gray-400">
                           <Info size={14} className="shrink-0 mt-0.5" />
                           <p>
-                            Assumes fuel price at ₹114.04/L. Hyryder Hybrid mileage is 27.97 km/l. Maintenance is mock data (₹8,000/yr). 
+                            Assumes fuel price at ₹114.04/L. Hyryder Hybrid mileage is 27.97 km/l. Total maintenance is ₹26,500 for 5 years.
                           </p>
                         </div>
                       </motion.div>
