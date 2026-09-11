@@ -164,28 +164,43 @@ export default function Home() {
                     </motion.div>
                   </button>
 
-                  {isDropdownOpen && (
-                    <>
-                      <div className="fixed inset-0 z-40" onPointerDown={() => { triggerHaptic(); setIsDropdownOpen(false); }} />
-                      <div className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-hidden z-50 py-1.5">
-                        {RUN_OPTIONS.map((opt) => (
-                          <button
-                            type="button"
-                            key={opt.value}
-                            onPointerDown={(e) => {
-                              e.preventDefault();
-                              triggerHaptic();
-                              setMonthlyKm(opt.value);
-                              setIsDropdownOpen(false);
-                            }}
-                            className={`w-full text-left px-4 py-3.5 text-[14px] transition-colors ${monthlyKm === opt.value ? 'bg-purple-50 text-purple-700 font-bold' : 'text-gray-700 font-medium active:bg-gray-50'}`}
-                          >
-                            {opt.label}
-                          </button>
-                        ))}
-                      </div>
-                    </>
-                  )}
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <>
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.15 }}
+                          className="fixed inset-0 z-40"
+                          onPointerDown={() => { triggerHaptic(); setIsDropdownOpen(false); }}
+                        />
+                        <motion.div
+                          initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -4, scale: 0.98 }}
+                          transition={{ duration: 0.15, ease: "easeOut" }}
+                          className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-hidden z-50 py-1.5 origin-top"
+                        >
+                          {RUN_OPTIONS.map((opt) => (
+                            <button
+                              type="button"
+                              key={opt.value}
+                              onPointerDown={(e) => {
+                                e.preventDefault();
+                                triggerHaptic();
+                                setMonthlyKm(opt.value);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-3.5 text-[14px] transition-colors ${monthlyKm === opt.value ? 'bg-purple-50 text-purple-700 font-bold' : 'text-gray-700 font-medium active:bg-gray-50'}`}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
