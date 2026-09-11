@@ -93,7 +93,7 @@ export default function Home() {
                 <input
                   type="text"
                   inputMode="numeric"
-                  maxLength={11}
+                  maxLength={9}
                   value={competitorPrice}
                   onChange={(e) => setCompetitorPrice(formatIN(e.target.value))}
                   placeholder="18,00,000"
