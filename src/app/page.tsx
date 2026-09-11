@@ -87,17 +87,17 @@ export default function Home() {
       {/* Subtle Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-red-100/40 blur-[100px] rounded-full pointer-events-none" />
 
-      <motion.div layout className="w-full max-w-md relative z-10 space-y-6">
+      <div className="w-full max-w-md relative z-10 space-y-6">
         
-        <motion.div layout className="text-center pt-4 mb-4">
+        <div className="text-center pt-4 mb-4">
           <h1 className="text-[40px] leading-none font-bold text-gray-900 tracking-tight font-heading">
             Compare & Save
           </h1>
           <p className="text-gray-500 text-[13px] mt-2 font-medium uppercase tracking-wider">5-Year Cost of Ownership</p>
-        </motion.div>
+        </div>
 
         {/* Main Integrated Card */}
-        <motion.div layout className="bg-white rounded-[32px] p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white">
+        <div className="bg-white rounded-[32px] p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white">
           
           {/* Inputs Section */}
           <div className="space-y-5">
@@ -204,7 +204,6 @@ export default function Home() {
           <AnimatePresence>
             {isComplete && (
               <motion.div 
-                layout
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
@@ -239,13 +238,14 @@ export default function Home() {
                     </button>
                   </div>
 
-                  <AnimatePresence mode="wait">
+                  <AnimatePresence>
                     {showReport && (
                       <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                        className="overflow-hidden"
                       >
                         <div className="mt-5 space-y-2">
                           <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 px-2">
@@ -320,8 +320,8 @@ export default function Home() {
             )}
           </AnimatePresence>
 
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </main>
   );
 }
