@@ -12,10 +12,11 @@
   --font-heading: var(--font-heading);
 }
 
-body {
-  background-color: var(--background);
-  background-image: linear-gradient(to bottom, #fdecec 0%, #F4F5F7 400px);
-  background-repeat: no-repeat;
+html, body {
+  /* Split gradient: Top half is red tint, Bottom half is standard gray */
+  background-image: linear-gradient(to bottom, #fdecec 0%, #fdecec 50vh, #F4F5F7 50vh, #F4F5F7 100%);
+  background-color: #F4F5F7;
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
