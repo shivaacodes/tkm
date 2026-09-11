@@ -89,7 +89,11 @@ export default function Home() {
 
       <div className="w-full max-w-md relative z-10 space-y-6">
         
-        <div className="text-center pt-4 mb-4">
+        <div className="text-center pt-2 mb-4 flex flex-col items-center">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 mb-3 bg-white/60 backdrop-blur-md rounded-full border border-gray-200/50 text-gray-700 shadow-sm">
+            <CarFront size={12} className="text-emerald-600" />
+            <span className="text-[10px] font-black uppercase tracking-widest mt-[1px]">Vs Toyota Hyryder Hybrid</span>
+          </div>
           <h1 className="text-[40px] leading-none font-bold text-gray-900 tracking-tight font-heading">
             Compare & Save
           </h1>
@@ -218,22 +222,16 @@ export default function Home() {
                     <div className={`text-[52px] leading-none font-heading font-bold tracking-tighter ${hasSavings ? 'text-[#1B5E20]' : 'text-red-900'}`}>
                       {formatCurrency(Math.abs(savings))}
                     </div>
-                    <div className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 bg-gray-50 rounded-full border border-gray-100">
-                      <CarFront size={12} className={hasSavings ? 'text-green-500' : 'text-red-500'} />
-                      <p className={`text-[11px] font-bold uppercase tracking-wider ${hasSavings ? 'text-green-700' : 'text-red-700'}`}>
-                        With Toyota Hyryder Hybrid
-                      </p>
-                    </div>
                   </div>
 
-                  <div className="text-center mt-5">
+                  <div className="mt-6 flex justify-center">
                     <button
                       onClick={() => setShowReport(!showReport)}
-                      className="inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all cursor-pointer"
+                      className="group flex items-center justify-center gap-2 px-5 py-3 bg-gray-50 hover:bg-gray-100/80 active:bg-gray-200 text-gray-700 text-[11px] font-black uppercase tracking-widest rounded-full transition-all active:scale-95 border border-gray-200/60 shadow-sm"
                     >
-                      <span>{showReport ? "Close Cost Breakdown" : "View Cost Breakdown"}</span>
-                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className={showReport ? "text-pink-500" : "text-purple-500"}>
-                        <ChevronDown size={14} strokeWidth={3} />
+                      <span>{showReport ? "Close Breakdown" : "View Cost Breakdown"}</span>
+                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400 group-hover:text-gray-600 transition-colors">
+                        <ChevronDown size={14} strokeWidth={2.5} />
                       </motion.div>
                     </button>
                   </div>
