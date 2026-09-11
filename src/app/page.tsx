@@ -188,7 +188,7 @@ export default function Home() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: -4, scale: 0.98 }}
                           transition={{ duration: 0.15, ease: "easeOut" }}
-                          className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-hidden z-50 py-1.5 origin-top"
+                          className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-y-auto max-h-[180px] overscroll-contain z-50 py-1.5 origin-top"
                         >
                           {RUN_OPTIONS.map((opt) => (
                             <button
@@ -267,11 +267,11 @@ export default function Home() {
                   <div className="text-center mt-5">
                     <button
                       onClick={() => setShowReport(!showReport)}
-                      className="inline-flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-widest text-gray-400 hover:text-gray-800 transition-colors"
+                      className="inline-flex items-center gap-1.5 text-[12px] font-black uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-400 to-gray-600 hover:from-gray-600 hover:to-gray-900 transition-all cursor-pointer"
                     >
                       <span>{showReport ? "Close Cost Breakdown" : "View Cost Breakdown"}</span>
-                      <motion.div animate={{ rotate: showReport ? 180 : 0 }}>
-                        <ChevronDown size={14} />
+                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400">
+                        <ChevronDown size={14} strokeWidth={3} />
                       </motion.div>
                     </button>
                   </div>
