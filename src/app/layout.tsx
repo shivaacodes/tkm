@@ -13,7 +13,7 @@ const headingFont = Syne({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F4F5F7",
+  themeColor: "#f8ecee", // Tells Safari to use the red/pink tint for the top overscroll and status bar
   width: "device-width",
   initialScale: 1,
   maximumScale: 1, // Prevents zooming on mobile
