@@ -280,7 +280,7 @@ export default function Home() {
                         <div className="mt-5 space-y-2">
                           <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-gray-400 px-2">
                             <div className="w-1/3 text-left">Parameter</div>
-                            <div className="w-1/3 text-right text-red-500">Hyryder Hybrid</div>
+                            <div className="w-1/3 text-right text-emerald-600">Hyryder Hybrid</div>
                             <div className="w-1/3 text-right">Current</div>
                           </div>
 
@@ -303,10 +303,10 @@ export default function Home() {
                               <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(cMaintTotal)}</div>
                             </div>
 
-                            <div className="flex justify-between items-center mt-1 py-4 px-4 bg-gray-900 text-white rounded-[20px] shadow-lg shadow-gray-900/5">
-                              <div className="w-1/3 text-[13px] font-bold">Total TCO</div>
-                              <div className="w-1/3 text-right text-[14px] font-black text-red-400">{formatCurrency(hTCO)}</div>
-                              <div className="w-1/3 text-right text-[14px] font-black">{formatCurrency(cTCO)}</div>
+                            <div className="flex justify-between items-center mt-2 pt-4 pb-2 px-3 border-t border-gray-200/60">
+                              <div className="w-1/3 text-[13px] font-black text-gray-900">Total TCO</div>
+                              <div className="w-1/3 text-right text-[14px] font-black text-emerald-600">{formatCurrency(hTCO)}</div>
+                              <div className="w-1/3 text-right text-[14px] font-black text-gray-900">{formatCurrency(cTCO)}</div>
                             </div>
                           </div>
                         </div>
