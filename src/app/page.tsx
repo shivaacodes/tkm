@@ -23,10 +23,19 @@ const formatIN = (value: string) => {
 
 const getRawNumber = (formatted: string) => parseFloat(formatted.replace(/,/g, "")) || 0;
 
+const RUN_OPTIONS = [
+  { label: "< 500 km / month", value: "400" },
+  { label: "1,000 km / month", value: "1000" },
+  { label: "1,500 km / month", value: "1500" },
+  { label: "2,000 km / month", value: "2000" },
+  { label: "> 2,000 km / month", value: "2500" },
+];
+
 export default function Home() {
   const [competitorPrice, setCompetitorPrice] = useState<string>("");
   const [competitorMileage, setCompetitorMileage] = useState<string>("");
   const [monthlyKm, setMonthlyKm] = useState<string>("");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [competitorMaintenance, setCompetitorMaintenance] = useState<string>("");
   const [showReport, setShowReport] = useState(false);
 
@@ -102,7 +111,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-5">
+            <div className="grid grid-cols-[1.1fr_1.9fr] gap-4">
               <div>
                 <div className="flex items-center gap-2.5 mb-2.5">
                   <div className="w-8 h-8 rounded-xl bg-blue-50 flex items-center justify-center text-blue-500 shadow-sm border border-blue-100/50">
@@ -118,10 +127,10 @@ export default function Home() {
                     value={competitorMileage}
                     onChange={(e) => setCompetitorMileage(formatIN(e.target.value))}
                     placeholder="16.5"
-                    className="w-full pl-4 pr-12 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-50 focus:border-blue-200 transition-all outline-none text-xl font-bold shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] placeholder:text-gray-300"
+                    className="w-full pl-3 pr-11 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-blue-50 focus:border-blue-200 transition-all outline-none text-[18px] font-bold shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] placeholder:text-gray-300"
                   />
-                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                    <span className="text-gray-400 font-semibold text-xs">km/l</span>
+                  <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <span className="text-gray-400 font-semibold text-[11px]">km/l</span>
                   </div>
                 </div>
               </div>
@@ -134,21 +143,44 @@ export default function Home() {
                   <label className="text-[13px] font-bold text-gray-700">Monthly Run</label>
                 </div>
                 <div className="relative">
-                  <select
-                    value={monthlyKm}
-                    onChange={(e) => setMonthlyKm(e.target.value)}
-                    className={`w-full px-4 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-[15px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] appearance-none ${!monthlyKm ? 'text-gray-400 font-medium' : 'text-gray-900 font-bold'}`}
+                  <button
+                    type="button"
+                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    className={`w-full px-4 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-[14px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] flex justify-between items-center ${!monthlyKm ? 'text-gray-400 font-medium' : 'text-gray-900 font-bold'}`}
                   >
-                    <option value="" disabled hidden>Select approx...</option>
-                    <option value="400">{"<"} 500 km / month</option>
-                    <option value="1000">1,000 km / month</option>
-                    <option value="1500">1,500 km / month</option>
-                    <option value="2000">2,000 km / month</option>
-                    <option value="2500">{">"} 2,000 km / month</option>
-                  </select>
-                  <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
-                    <ChevronDown size={18} className="text-gray-400" />
-                  </div>
+                    <span className="truncate pr-2">{monthlyKm ? RUN_OPTIONS.find(o => o.value === monthlyKm)?.label : "Select approx..."}</span>
+                    <motion.div animate={{ rotate: isDropdownOpen ? 180 : 0 }}>
+                      <ChevronDown size={16} className="text-gray-400 shrink-0" />
+                    </motion.div>
+                  </button>
+
+                  <AnimatePresence>
+                    {isDropdownOpen && (
+                      <>
+                        <div className="fixed inset-0 z-40" onClick={() => setIsDropdownOpen(false)} />
+                        <motion.div
+                          initial={{ opacity: 0, y: -5, scale: 0.98 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -5, scale: 0.98 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute top-[calc(100%+8px)] left-0 w-full bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.12)] rounded-2xl overflow-hidden z-50 py-1.5"
+                        >
+                          {RUN_OPTIONS.map((opt) => (
+                            <button
+                              key={opt.value}
+                              onClick={() => {
+                                setMonthlyKm(opt.value);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-3 text-[14px] transition-colors ${monthlyKm === opt.value ? 'bg-purple-50 text-purple-700 font-bold' : 'text-gray-700 font-medium hover:bg-gray-50'}`}
+                            >
+                              {opt.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
