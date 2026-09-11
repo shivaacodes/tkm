@@ -140,13 +140,11 @@ export default function Home() {
                     className={`w-full px-4 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-[15px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] appearance-none ${!monthlyKm ? 'text-gray-400 font-medium' : 'text-gray-900 font-bold'}`}
                   >
                     <option value="" disabled hidden>Select approx...</option>
-                    <option value="500">500 km / month</option>
+                    <option value="400">{"<"} 500 km / month</option>
                     <option value="1000">1,000 km / month</option>
                     <option value="1500">1,500 km / month</option>
                     <option value="2000">2,000 km / month</option>
-                    <option value="2500">2,500 km / month</option>
-                    <option value="3000">3,000 km / month</option>
-                    <option value="4000">4,000+ km / month</option>
+                    <option value="2500">{">"} 2,000 km / month</option>
                   </select>
                   <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
                     <ChevronDown size={18} className="text-gray-400" />
