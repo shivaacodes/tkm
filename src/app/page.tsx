@@ -211,45 +211,47 @@ export default function Home() {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                transition={{ type: "spring", bounce: 0.35, duration: 0.6 }}
+                transition={{ type: "spring", stiffness: 350, damping: 28 }}
                 className="overflow-hidden"
               >
-                <div className="pt-6 mt-6 border-t border-dashed border-gray-200">
-                  <div className="text-center">
-                    <h2 className={`font-bold mb-2 text-[11px] uppercase tracking-widest ${hasSavings ? 'text-[#1B5E20]' : 'text-red-900'}`}>
-                      {hasSavings ? "You Save (5 Years)" : "Extra Cost"}
-                    </h2>
-                    <div className={`text-[52px] leading-none font-heading font-bold tracking-tighter ${hasSavings ? 'text-[#1B5E20]' : 'text-red-900'}`}>
-                      {formatCurrency(Math.abs(savings))}
+                <div className="pt-6">
+                  <div className="pt-6 border-t border-dashed border-gray-200">
+                    <div className="text-center">
+                      <h2 className={`font-bold mb-2 text-[11px] uppercase tracking-widest ${hasSavings ? 'text-[#1B5E20]' : 'text-red-900'}`}>
+                        {hasSavings ? "You Save (5 Years)" : "Extra Cost"}
+                      </h2>
+                      <div className={`text-[52px] leading-none font-heading font-bold tracking-tighter ${hasSavings ? 'text-[#1B5E20]' : 'text-red-900'}`}>
+                        {formatCurrency(Math.abs(savings))}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="mt-6 flex justify-center">
-                    <button
-                      onClick={() => setShowReport(!showReport)}
-                      className="group flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-b from-white to-gray-50 hover:to-gray-100 active:bg-gray-100 text-gray-800 text-[11px] font-black uppercase tracking-widest rounded-[14px] transition-all active:scale-[0.97] border border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
-                    >
-                      <span>{showReport ? "Close Breakdown" : "View Cost Breakdown"}</span>
-                      <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400 group-hover:text-gray-600 transition-colors">
-                        <ChevronDown size={14} strokeWidth={2.5} />
-                      </motion.div>
-                    </button>
-                  </div>
-
-                  <AnimatePresence>
-                    {showReport && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ type: "spring", bounce: 0.35, duration: 0.6 }}
-                        className="overflow-hidden"
+                    <div className="mt-6 flex justify-center">
+                      <button
+                        onClick={() => setShowReport(!showReport)}
+                        className="group flex items-center justify-center gap-2 px-5 py-2.5 bg-gradient-to-b from-white to-gray-50 hover:to-gray-100 active:bg-gray-100 text-gray-800 text-[11px] font-black uppercase tracking-widest rounded-[14px] transition-all active:scale-[0.97] border border-gray-200 shadow-[0_2px_10px_rgba(0,0,0,0.04)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.06)]"
                       >
-                        <div className="mt-5 border border-gray-200/60 rounded-[20px] overflow-hidden bg-white shadow-sm">
-                          {/* Header */}
-                          <div className="flex bg-gray-50/50 border-b border-gray-200/60">
-                            <div className="w-1/3 py-3 px-3 text-[10px] font-black uppercase tracking-widest text-gray-900 border-r border-gray-200/60 flex items-center">Parameter</div>
-                            <div className="w-1/3 py-3 px-3 text-[10px] font-black uppercase tracking-widest text-emerald-600 border-r border-gray-200/60 text-right">Hyryder</div>
+                        <span>{showReport ? "Close Breakdown" : "View Cost Breakdown"}</span>
+                        <motion.div animate={{ rotate: showReport ? 180 : 0 }} className="text-gray-400 group-hover:text-gray-600 transition-colors">
+                          <ChevronDown size={14} strokeWidth={2.5} />
+                        </motion.div>
+                      </button>
+                    </div>
+
+                    <AnimatePresence>
+                      {showReport && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ type: "spring", stiffness: 350, damping: 28 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pt-5 pb-1">
+                            <div className="border border-gray-200/60 rounded-[20px] overflow-hidden bg-white shadow-sm">
+                              {/* Header */}
+                              <div className="flex bg-gray-50/50 border-b border-gray-200/60">
+                                <div className="w-1/3 py-3 px-3 text-[10px] font-black uppercase tracking-widest text-gray-900 border-r border-gray-200/60 flex items-center">Parameter</div>
+                                <div className="w-1/3 py-3 px-3 text-[10px] font-black uppercase tracking-widest text-emerald-600 border-r border-gray-200/60 text-right">Hyryder</div>
                             <div className="w-1/3 py-3 px-3 text-[10px] font-black uppercase tracking-widest text-gray-900 text-right">Current</div>
                           </div>
 
@@ -306,8 +308,9 @@ export default function Home() {
                             <div className="w-1/3 py-3.5 px-3 text-[13px] font-black text-right text-gray-900">{formatCurrency(cTCO)}</div>
                           </div>
                         </div>
+                      </div>
 
-                        <div className="mt-4 px-2 flex gap-3 text-[11px] font-medium leading-relaxed text-gray-400">
+                      <div className="pt-4 px-2 flex gap-3 text-[11px] font-medium leading-relaxed text-gray-400">
                           <Info size={14} className="shrink-0 mt-0.5" />
                           <p>
                             Assumes fuel price at ₹114.04/L. Hyryder Hybrid mileage is 27.97 km/l. Total maintenance is ₹26,500 for 5 years.
@@ -316,6 +319,7 @@ export default function Home() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                </div>
                 </div>
               </motion.div>
             )}
