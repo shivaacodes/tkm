@@ -63,6 +63,14 @@ export default function Home() {
   const hMaintTotal = HYRYDER_MAINTENANCE * YEARS;
   const hTCO = HYRYDER_PRICE + hFuelTotal + hMaintTotal;
 
+  const cFuelYearly = cFuelTotal / YEARS;
+  const cFuelMonthly = cFuelYearly / 12;
+  const hFuelYearly = hFuelTotal / YEARS;
+  const hFuelMonthly = hFuelYearly / 12;
+
+  const cMaintYearly = cMaint;
+  const hMaintYearly = HYRYDER_MAINTENANCE;
+
   const savings = cTCO - hTCO;
   const hasSavings = savings > 0;
 
@@ -291,19 +299,44 @@ export default function Home() {
                               <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(cPrice)}</div>
                             </div>
 
-                            <div className="flex justify-between items-center py-2.5 px-3">
-                              <div className="w-1/3 text-[12px] text-gray-500 font-bold">Fuel (5y)</div>
-                              <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(hFuelTotal)}</div>
-                              <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(cFuelTotal)}</div>
+                            <div className="pt-2 pb-1 px-3 border-t border-gray-100/50 mt-1">
+                              <div className="text-[10px] font-black uppercase tracking-widest text-blue-500 mb-2">Fuel</div>
+                              <div className="space-y-1">
+                                <div className="flex justify-between items-center">
+                                  <div className="w-1/3 text-[12px] text-gray-500 font-medium">Monthly</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(hFuelMonthly)}</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(cFuelMonthly)}</div>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                  <div className="w-1/3 text-[12px] text-gray-500 font-medium">Yearly</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(hFuelYearly)}</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(cFuelYearly)}</div>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                  <div className="w-1/3 text-[12px] text-gray-500 font-bold">5 Years</div>
+                                  <div className="w-1/3 text-right text-[13px] font-black">{formatCurrency(hFuelTotal)}</div>
+                                  <div className="w-1/3 text-right text-[13px] font-black">{formatCurrency(cFuelTotal)}</div>
+                                </div>
+                              </div>
                             </div>
 
-                            <div className="flex justify-between items-center py-2.5 px-3">
-                              <div className="w-1/3 text-[12px] text-gray-500 font-bold">Maint. (5y)</div>
-                              <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(hMaintTotal)}</div>
-                              <div className="w-1/3 text-right text-[13px] font-bold">{formatCurrency(cMaintTotal)}</div>
+                            <div className="pt-3 pb-1 px-3 border-t border-gray-100/50 mt-2">
+                              <div className="text-[10px] font-black uppercase tracking-widest text-orange-500 mb-2">Maintenance</div>
+                              <div className="space-y-1">
+                                <div className="flex justify-between items-center">
+                                  <div className="w-1/3 text-[12px] text-gray-500 font-medium">Yearly</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(hMaintYearly)}</div>
+                                  <div className="w-1/3 text-right text-[12px] font-bold text-gray-700">{formatCurrency(cMaintYearly)}</div>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                  <div className="w-1/3 text-[12px] text-gray-500 font-bold">5 Years</div>
+                                  <div className="w-1/3 text-right text-[13px] font-black">{formatCurrency(hMaintTotal)}</div>
+                                  <div className="w-1/3 text-right text-[13px] font-black">{formatCurrency(cMaintTotal)}</div>
+                                </div>
+                              </div>
                             </div>
 
-                            <div className="flex justify-between items-center mt-2 pt-4 pb-2 px-3 border-t border-gray-200/60">
+                            <div className="flex justify-between items-center mt-3 pt-4 pb-2 px-3 border-t border-gray-200/60">
                               <div className="w-1/3 text-[13px] font-black text-gray-900">Total TCO</div>
                               <div className="w-1/3 text-right text-[14px] font-black text-emerald-600">{formatCurrency(hTCO)}</div>
                               <div className="w-1/3 text-right text-[14px] font-black text-gray-900">{formatCurrency(cTCO)}</div>
