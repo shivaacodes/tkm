@@ -24,12 +24,18 @@ const formatIN = (value: string) => {
 const getRawNumber = (formatted: string) => parseFloat(formatted.replace(/,/g, "")) || 0;
 
 const RUN_OPTIONS = [
-  { label: "< 500 km / month", value: "400" },
-  { label: "1,000 km / month", value: "1000" },
-  { label: "1,500 km / month", value: "1500" },
-  { label: "2,000 km / month", value: "2000" },
-  { label: "> 2,000 km / month", value: "2500" },
+  { label: "< 500 km", value: "400" },
+  { label: "1,000 km", value: "1000" },
+  { label: "1,500 km", value: "1500" },
+  { label: "2,000 km", value: "2000" },
+  { label: "> 2,000 km", value: "2500" },
 ];
+
+const triggerHaptic = () => {
+  if (typeof window !== "undefined" && window.navigator && window.navigator.vibrate) {
+    window.navigator.vibrate(40);
+  }
+};
 
 export default function Home() {
   const [competitorPrice, setCompetitorPrice] = useState<string>("");
@@ -69,7 +75,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-[#F4F5F7] text-gray-900 font-sans selection:bg-red-200 flex flex-col justify-center items-center p-4 sm:p-6 overflow-hidden relative">
+    <main className="min-h-[100dvh] bg-[#F4F5F7] text-gray-900 font-sans selection:bg-red-200 flex flex-col justify-center items-center p-4 sm:p-6 relative">
       
       {/* Subtle Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-red-100/40 blur-[100px] rounded-full pointer-events-none" />
@@ -145,7 +151,11 @@ export default function Home() {
                 <div className="relative">
                   <button
                     type="button"
-                    onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      triggerHaptic();
+                      setIsDropdownOpen(!isDropdownOpen);
+                    }}
                     className={`w-full px-4 py-3.5 bg-[#F9FAFB] border border-gray-100 rounded-2xl focus:bg-white focus:ring-4 focus:ring-purple-50 focus:border-purple-200 transition-all outline-none text-[14px] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)] flex justify-between items-center ${!monthlyKm ? 'text-gray-400 font-medium' : 'text-gray-900 font-bold'}`}
                   >
                     <span className="truncate pr-2">{monthlyKm ? RUN_OPTIONS.find(o => o.value === monthlyKm)?.label : "Select approx..."}</span>
@@ -156,7 +166,7 @@ export default function Home() {
 
                   {isDropdownOpen && (
                     <>
-                      <div className="fixed inset-0 z-40" onPointerDown={() => setIsDropdownOpen(false)} />
+                      <div className="fixed inset-0 z-40" onPointerDown={() => { triggerHaptic(); setIsDropdownOpen(false); }} />
                       <div className="absolute top-[calc(100%+6px)] left-0 w-full bg-white border border-gray-100 shadow-[0_12px_40px_rgb(0,0,0,0.12)] rounded-[18px] overflow-hidden z-50 py-1.5">
                         {RUN_OPTIONS.map((opt) => (
                           <button
@@ -164,6 +174,7 @@ export default function Home() {
                             key={opt.value}
                             onPointerDown={(e) => {
                               e.preventDefault();
+                              triggerHaptic();
                               setMonthlyKm(opt.value);
                               setIsDropdownOpen(false);
                             }}
